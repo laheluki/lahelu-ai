@@ -28,7 +28,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <main className='sm:px-10 px-5'>{children}</main>
         </ThemeProvider>
       </body>
     </html>
