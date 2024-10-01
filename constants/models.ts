@@ -33,7 +33,7 @@ export const MODELS: ModelsType[] = [
   {
     provider: 'groq',
     models: [
-      { value: 'mixtral-8x7b-32768', label: 'Mixtral 8x7B', vision: true },
+      { value: 'mixtral-8x7b-32768', label: 'Mixtral 8x7B' },
       { value: 'llama3-8b-8192', label: 'Meta Llama 3 8B' },
       { value: 'llama3-70b-8192', label: 'Meta Llama 3 70B' },
       { value: 'llava-v1.5-7b-4096-preview', label: 'LLaVA 1.5 7B' },
