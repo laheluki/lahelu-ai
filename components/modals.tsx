@@ -11,25 +11,29 @@ import {
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 
-interface ModalUpdate {
+interface Modal {
   trigger: ReactNode;
   title: string;
   description: string;
   inputLabel?: string;
-  inputValue: string;
-  setInputValue: (value: string) => void;
-  onSave: () => void;
+  inputValue?: string;
+  setInputValue?: (value: string) => void;
+  variant?: 'destructive' | 'default';
+  buttonTitle?: string;
+  onConfirm: () => void;
 }
 
-export const ModalUpdate = ({
+export const Modals = ({
   trigger,
   title,
   description,
   inputLabel,
   inputValue,
   setInputValue,
-  onSave,
-}: ModalUpdate) => {
+  buttonTitle = 'Save',
+  variant = 'default',
+  onConfirm,
+}: Modal) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [open, setIsOpen] = useState(false);
 
@@ -50,7 +54,7 @@ export const ModalUpdate = ({
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
-        {inputLabel && (
+        {inputLabel && inputValue && setInputValue && (
           <div className='space-y-1'>
             <label>{inputLabel}</label>
             <Input
@@ -65,13 +69,14 @@ export const ModalUpdate = ({
           </Button>
 
           <Button
+            variant={variant}
             ref={buttonRef}
             onClick={() => {
-              onSave();
+              onConfirm();
               setIsOpen(false);
             }}
           >
-            Save
+            {buttonTitle}
           </Button>
         </DialogFooter>
       </DialogContent>

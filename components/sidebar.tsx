@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { FolderPlus, MessageCircleHeartIcon, Plus } from 'lucide-react';
 import { useLiveQuery } from 'dexie-react-hooks';
 
@@ -31,6 +31,7 @@ const linkVariant = buttonVariants({
 
 export const Sidebar = () => {
   const pathname = useParams();
+  const router = useRouter();
   const folders = useLiveQuery(() => db.folders.toArray());
   const topic = useLiveQuery(() => db.topics.toArray());
   const [query, setQuery] = useState('');
@@ -155,17 +156,18 @@ export const Sidebar = () => {
                     key={topic.id}
                     draggable
                     onDragStart={(e) => handleDragStart(e, topic.id)}
+                    onClick={() => router.push(`/c/${topic.id}`)}
                   >
-                    <Link
+                    {/* <Link
                       href={`/c/${topic.id}`}
                       onClick={() => setOpen(!open)}
-                    >
-                      <ChatItem
-                        id={topic.id}
-                        title={topic.title}
-                        linkActive={pathname.id === topic.id}
-                      />
-                    </Link>
+                    > */}
+                    <ChatItem
+                      id={topic.id}
+                      title={topic.title}
+                      linkActive={pathname.id === topic.id}
+                    />
+                    {/* </Link> */}
                   </div>
                 ))}
             </FolderItem>
@@ -187,14 +189,15 @@ export const Sidebar = () => {
                 onDragEnter={handleDragEnter}
                 onDragLeave={handleDragLeave}
                 onDragOver={handleDragOver}
+                onClick={() => router.push(`/c/${item.id}`)}
               >
-                <Link href={`/c/${item.id}`} onClick={() => setOpen(!open)}>
-                  <ChatItem
-                    id={item.id}
-                    title={item.title}
-                    linkActive={pathname.id === item.id}
-                  />
-                </Link>
+                {/* <Link href={`/c/${item.id}`} onClick={() => setOpen(!open)}> */}
+                <ChatItem
+                  id={item.id}
+                  title={item.title}
+                  linkActive={pathname.id === item.id}
+                />
+                {/* </Link> */}
               </div>
             ))}
         </div>

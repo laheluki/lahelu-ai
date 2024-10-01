@@ -85,7 +85,7 @@ export default function Chat() {
 
       if (image instanceof File && image.size !== 0) {
         imageId = generateRandomId(4);
-        await await insertImage(imageId, blob!, base64);
+        await await insertImage(imageId, blob!, base64, topicId);
       }
 
       await generateTopic(topicId, title);

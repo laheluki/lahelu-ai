@@ -34,4 +34,8 @@ export async function inserTopicToFolder(key: IndexableType, id: string) {
   }
 }
 
-export async function deleteTopicFromFolder() {}
+export async function deleteFolder(id: string) {
+  const res = db.folders.delete(id);
+  await db.topics.where('folderId').equals(id).delete();
+  return res;
+}

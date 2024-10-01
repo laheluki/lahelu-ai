@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
-import { ModalUpdate } from './modal-update';
-import { ChevronsRight, SquarePen } from 'lucide-react';
+import { Modals } from './modals';
+import { ChevronsRight, SquarePen, Trash2Icon } from 'lucide-react';
+import { deleteTopic, updateTitleTopic } from '@/services/topic';
 
 interface ChatItemProps {
   id: string;
@@ -28,7 +29,13 @@ export const ChatItem = ({
   }
 
   function handleUpdateChat() {
-    chatId;
+    updateTitleTopic(chatId, title);
+    ref.current?.click();
+  }
+
+  function handleDeleteChat() {
+    deleteTopic(chatId);
+    ref.current?.click();
   }
   return (
     <div
@@ -51,14 +58,23 @@ export const ChatItem = ({
           !isActive && 'w-11 opacity-0 group-hover:opacity-100'
         }`}
       >
-        <ModalUpdate
+        <Modals
           trigger={<SquarePen className='hover:opacity-50' size={18} />}
           title='Edit Chat'
           description='Change title of this chat'
           inputLabel='Title'
           inputValue={title}
           setInputValue={setTitle}
-          onSave={handleUpdateChat}
+          onConfirm={handleUpdateChat}
+        />
+
+        <Modals
+          trigger={<Trash2Icon className='hover:opacity-50' size={18} />}
+          title='Delete Chat'
+          description='Delete Chat.'
+          onConfirm={handleDeleteChat}
+          variant='destructive'
+          buttonTitle='Delete'
         />
         {/* <FolderDelete folder={item} /> */}
       </div>

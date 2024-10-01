@@ -31,6 +31,7 @@ export interface ITopics {
 
 export interface ImageRow {
   id: string;
+  topicId: string;
   imageData: Blob;
   imageHash: Uint8Array;
 }
@@ -45,7 +46,7 @@ class DB extends Dexie {
   constructor() {
     super('LAHELU_AI_DB');
     this.version(1).stores({
-      images: '&id, imageData, imageHash',
+      images: '&id, imageData, imageHash, topicId',
       folders: '&id, title, createdAt, topics',
       conversations:
         '&id, question, answer, model, topicId, imageId, createdAt',

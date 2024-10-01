@@ -261,7 +261,7 @@ const ChatInputCustom = ({
 
       if (image instanceof File && image.size !== 0) {
         imageId = generateRandomId(4);
-        await insertImage(imageId, blob!, base64);
+        await insertImage(imageId, blob!, base64, id);
       }
 
       await updateConversation(

@@ -1,12 +1,12 @@
 import { ReactNode, useRef, useState } from 'react';
-import { ChevronDown, ChevronRight, SquarePen } from 'lucide-react';
+import { ChevronDown, ChevronRight, SquarePen, Trash2Icon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
-import { FolderDelete } from './folder-delete';
 import { db, IFolders } from '@/lib/db';
 import { addIdFolder } from '@/services/topic';
 import { toast } from 'sonner';
-import { ModalUpdate } from './modal-update';
+import { Modals } from './modals';
+import { deleteFolder } from '@/services/folder';
 
 interface FolderItemProps {
   children: ReactNode;
@@ -26,6 +26,10 @@ export const FolderItem = ({ children, folder }: FolderItemProps) => {
 
   async function handleUpdateFolder() {
     await db.folders.update(folder.id, { title: title });
+  }
+
+  async function handleDeleteFolder() {
+    await deleteFolder(folder.id);
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
@@ -107,17 +111,24 @@ export const FolderItem = ({ children, folder }: FolderItemProps) => {
               }}
               className='ml-2 flex space-x-2'
             >
-              <ModalUpdate
+              <Modals
                 trigger={<SquarePen className='hover:opacity-50' size={18} />}
-                title='Edit Chat'
+                title='Edit Folder'
                 description='Change title of this folder'
                 inputLabel='Title'
                 inputValue={title}
                 setInputValue={setTitle}
-                onSave={handleUpdateFolder}
+                onConfirm={handleUpdateFolder}
               />
 
-              <FolderDelete folder={folder} />
+              <Modals
+                trigger={<Trash2Icon className='hover:opacity-50' size={18} />}
+                title='Delete Folder'
+                description='Delete folder includes chats.'
+                onConfirm={handleDeleteFolder}
+                variant='destructive'
+                buttonTitle='Delete'
+              />
             </div>
           )}
         </div>
