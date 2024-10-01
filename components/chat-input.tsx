@@ -106,6 +106,7 @@ export const ChatInput = ({
             id='message'
             name='message'
             required
+            disabled={isDisabled}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder='What magic can we create today?'
