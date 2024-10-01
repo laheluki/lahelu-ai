@@ -57,6 +57,10 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
+        bounceX: {
+          '0%, 100%': { transform: 'translateX(0)' }, // Posisi awal dan akhir di sumbu X
+          '50%': { transform: 'translateX(10px)' },
+        },
         'accordion-down': {
           from: { height: '0' },
           to: { height: 'var(--radix-accordion-content-height)' },
@@ -69,6 +73,7 @@ const config: Config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'bounce-x': 'bounceX 2s infinite',
       },
     },
   },

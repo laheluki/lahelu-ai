@@ -3,6 +3,7 @@ import { Space_Grotesk } from 'next/font/google';
 
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
+import { Toaster } from '@/components/ui/sonner';
 
 const font = Space_Grotesk({
   subsets: ['latin'],
@@ -29,6 +30,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <main className='sm:px-10 px-5'>{children}</main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
