@@ -36,7 +36,7 @@ export const ChatInput = ({
 
   useEffect(() => {
     setIsDisabled(
-      Object.keys(model).length === 0 && message.trim().length === 0
+      !(model.value.trim().length > 0 && message.trim().length > 0)
     );
   }, [model, message]);
 
