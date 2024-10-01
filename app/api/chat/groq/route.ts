@@ -27,6 +27,7 @@ export async function POST(req: Request) {
         baseURL: env.GROQ_BASE_URL,
       },
       model,
+      cache: true,
       maxRetries: 3,
     });
 

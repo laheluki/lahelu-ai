@@ -28,6 +28,7 @@ export async function POST(req: Request) {
         baseURL: env.OPENAI_BASE_URL,
       },
       model,
+      cache: true,
       maxRetries: 3,
       maxTokens: 4096,
     });

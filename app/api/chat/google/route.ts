@@ -24,6 +24,7 @@ export async function POST(req: Request) {
     const genai = new ChatGoogleGenerativeAI({
       apiKey: env.GOOGLE_API_KEY,
       model,
+      cache: true,
       maxRetries: 3,
       maxOutputTokens: 4096,
     });
