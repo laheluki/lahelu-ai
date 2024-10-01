@@ -36,7 +36,7 @@ export const ChatInput = ({
 
   useEffect(() => {
     setIsDisabled(
-      Object.keys(model).length === 0 || message.trim().length === 0
+      Object.keys(model).length === 0 && message.trim().length === 0
     );
   }, [model, message]);
 
@@ -106,7 +106,6 @@ export const ChatInput = ({
             id='message'
             name='message'
             required
-            disabled={isDisabled}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder='What magic can we create today?'
