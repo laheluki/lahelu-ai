@@ -27,21 +27,19 @@ export async function POST(req: Request) {
         baseURL: env.GROQ_BASE_URL,
       },
       model,
-      cache: true,
-      maxRetries: 3,
     });
 
     const history_chat: BaseMessage[] = [];
 
     if (historyMessage) {
-      historyMessage?.map((history) => {
-        history_chat.push(
-          new HumanMessage(history.question),
-          new AIMessage(history.answer || '')
-        );
-      });
-
-      history_chat.slice(-10);
+      historyMessage
+        .flatMap((history) => {
+          history_chat.push(
+            new HumanMessage(history.question),
+            new AIMessage(history.answer || '')
+          );
+        })
+        .slice(-10);
     }
 
     const prompt = ChatPromptTemplate.fromMessages([
@@ -59,7 +57,6 @@ export async function POST(req: Request) {
       history_chat: history_chat,
       input: [new HumanMessage(messages)],
     });
-    console.log('🚀 ~ POST ~ response:', response);
 
     return NextResponse.json({
       code: 200,

@@ -29,6 +29,7 @@ export default function Chat() {
       if (message.trim() === '') return;
       const image = data.get('image');
       const url = checkProvider(provider);
+      console.log('🚀 ~ url:', url);
 
       const topicId = generateRandomId(9);
       let imageId = '';

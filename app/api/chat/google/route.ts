@@ -32,14 +32,14 @@ export async function POST(req: Request) {
     const history_chat: BaseMessage[] = [];
 
     if (historyMessage) {
-      historyMessage?.map((history) => {
-        history_chat.push(
-          new HumanMessage(history.question),
-          new AIMessage(history.answer || '')
-        );
-      });
-
-      history_chat.slice(-10);
+      historyMessage
+        .flatMap((history) => {
+          history_chat.push(
+            new HumanMessage(history.question),
+            new AIMessage(history.answer || '')
+          );
+        })
+        .slice(-10);
     }
 
     const prompt = ChatPromptTemplate.fromMessages([
