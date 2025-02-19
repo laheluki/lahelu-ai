@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Head from 'next/head'
 import { Space_Grotesk } from 'next/font/google';
 
 import './globals.css';
@@ -22,8 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <meta name="monetag" content="9d31bce2233c368beedbac526dcbc2c8">
       <body className={`${font.className} antialiased`}>
+        <Head>
+          <meta name="monetag" content="9d31bce2233c368beedbac526dcbc2c8">
+        </Head>
         <ThemeProvider
           attribute='class'
           defaultTheme='dark'
