@@ -24,9 +24,6 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body className={`${font.className} antialiased`}>
-        <Head>
-          <meta name="monetag" content="9d31bce2233c368beedbac526dcbc2c8"/>
-        </Head>
         <ThemeProvider
           attribute='class'
           defaultTheme='dark'
